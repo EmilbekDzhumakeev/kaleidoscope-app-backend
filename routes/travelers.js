@@ -7,8 +7,8 @@ const router = express.Router();
 ////////////////////////////////////////////////////////// GET all users//////////////////////////////////////////
 router.get('/', async (req, res) => {
    try {
-      const users = await User.find();
-      return res.send(users);
+      const travelers = await Traveler.find();
+      return res.send(travelers);
    } catch (ex) {
       return res.status(500).send(`Internal Server Error: ${ex}`);
    }
@@ -19,40 +19,37 @@ router.get('/:id', async (req, res) => {
    //TODO: refactor to get ALL users by videoId
    try {
 
-      const user = await User.findById(req.params.id);
-      if (!user)
-         return res.status(400).send(`The user with id "${req.params.id}" does not exist.`);
-      return res.send(user);
+      const traveler = await Traveler.findById(req.params.id);
+      if (!traveler)
+         return res.status(400).send(`The Traveler with id "${req.params.id}" does not exist.`);
+      return res.send(traveler);
    } catch (ex) {
       return res.status(500).send(`Internal Server Error: ${ex}`);
    }
 });
-////////////////////////////////////////////////////////// POST new User//////////////////////////////////////////
+////////////////////////////////////////////////////////// POST new Traveler//////////////////////////////////////////
 router.post('/', async (req, res) => {
    try {
-      // const { error } = (req.body);  // validateUser
-      // if (error)
-      //    return res.status(400).send(error);
 
-      let user = await User.findOne({ email: req.body.email });
-      if (user) return res.status(400).send('User already registered.');
+      let traveler = await Traveler.findOne({ email: req.body.email });
+      if (traveler) return res.status(400).send('Traveler already registered.');
 
-      user = new User({
+      traveler = new Traveler({
          name: req.body.name,
          password: req.body.password,
          email: req.body.email,
          avatar: '',
          aboutMe: 'Tell us all about you...',
-         friends: [],
+         role: req.body.role,
       });
 
-      await user.save();
-      return res.send(user);
+      await traveler.save();
+      return res.send(traveler);
    } catch (ex) {
       return res.status(500).send(`Internal Server Error: ${ex}`);
    }
 });
-
+/*
 
 ////////////////////////////////////////////////////////// Validate User Login //////////////////////////////////////////
 router.post('/login', async (req, res) => {
@@ -228,7 +225,7 @@ router.post('/:id/friends', async (req, res) => {
    } catch (ex) {
       return res.status(500).send(`Internal Server Error: ${ex}`);
    }
-}); */
+}); 
 ////////////////////////////////////////////////////////// POST to add a friend //////////////////////////////////////////
 router.post('/:id/friends', async (req, res) => {
    try {
@@ -293,5 +290,7 @@ router.put('/:userId/:postId', async (req, res) => {
    }
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+*/
 
 module.exports = router;
