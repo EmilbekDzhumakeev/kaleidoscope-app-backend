@@ -1,4 +1,5 @@
-const { Message, Comment, Tour, BookedTour, Traveler, TourGuide, validateTraveler,validateMessage  } = require('../models/traveler');
+const { Message,  BookedTour, Traveler,  validateTraveler,validateMessage  } = require('../models/traveler');
+const {TourGuide, Tour, Comment} = require('../models/tourGuide');
 const express = require('express');
 const router = express.Router();
 
@@ -49,6 +50,29 @@ router.post('/', async (req, res) => {
       return res.status(500).send(`Internal Server Error: ${ex}`);
    }
 });
+
+////////////////////////////////////////////////////////// POST new TourGuide//////////////////////////////////////////
+// router.post('/', async (req, res) => {
+//    try {
+
+//       let tourGuide = await TourGuide.findOne({ email: req.body.email });
+//       if (tourGuide) return res.status(400).send('TourGuide already registered.');
+
+//       tourGuide = new TourGuide({
+//          name: req.body.name,
+//          password: req.body.password,
+//          email: req.body.email,
+//          avatar: '',
+//          aboutMe: 'Tell us all about you...',
+//          role: req.body.role,
+//       });
+
+//       await tourGuide.save();
+//       return res.send(tourGuide);
+//    } catch (ex) {
+//       return res.status(500).send(`Internal Server Error: ${ex}`);
+//    }
+// });
 /*
 
 ////////////////////////////////////////////////////////// Validate User Login //////////////////////////////////////////
