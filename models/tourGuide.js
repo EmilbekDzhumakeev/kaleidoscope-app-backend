@@ -16,7 +16,7 @@ const commentSchema = new mongoose.Schema({
 const tourSchema = new mongoose.Schema({
     tTitle: { type: String, required: true, minlength: 5, maxlength: 1000 },
     description: { type: Number, required: true, default: 0 },
-    route: {type: String, required: true, minlength: 5, maxlength: 50}, 
+    route: {type: String, required: true, minlength: 5, maxlength: 1000},
     comments: [commentSchema],
     dateAdded: { type: Date, default: Date.now },
   });
