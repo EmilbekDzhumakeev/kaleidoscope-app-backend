@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-//const {TourGuide, Tour, Comment} = require('./tourGuide');
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 const messageSchema = new mongoose.Schema({

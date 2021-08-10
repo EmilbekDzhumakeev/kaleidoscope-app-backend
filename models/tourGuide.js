@@ -1,25 +1,5 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-//const { Message,  BookedTour, Traveler } = require('./traveler');
- 
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-// const commentSchema = new mongoose.Schema({
-//     author: { type: String, required: true, minlength: 5, maxlength: 500 },
-//     feedback: {type: String, required: true, minlength: 5, maxlength: 50},
-//     likes: { type: Number, required: true, default: 0 },
-//     dislikes: { type: Number, required: true, default: 0 },
-//     dateAdded: { type: Date, default: Date.now },
-//   });
-
-// ////////////////////////////////////////////////////////////////////////////////////////////////
-// const tourSchema = new mongoose.Schema({
-//     tTitle: { type: String, required: true, minlength: 5, maxlength: 1000 },
-//     description: { type: Number, required: true, default: 0 },
-//     route: {type: String, required: true, minlength: 5, maxlength: 1000},
-//     comments: [commentSchema],
-//     dateAdded: { type: Date, default: Date.now },
-//   });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 const tourGuideSchema = new mongoose.Schema({
@@ -36,19 +16,13 @@ const tourGuideSchema = new mongoose.Schema({
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
- //const Comment = mongoose.model("Comment", commentSchema);
- //const Tour = mongoose.model("Tour", tourSchema);
  const TourGuide = mongoose.model("TourGuide", tourGuideSchema);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
   module.exports = {
-   
-    //Comment: Comment,
-   // Tour: Tour,
     TourGuide: TourGuide,
-    
   } 
   
   

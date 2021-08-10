@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-//const { Message,  BookedTour, Traveler } = require('./traveler');
-//const {TourGuide} = require('./tourGuide');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 const commentSchema = new mongoose.Schema({
