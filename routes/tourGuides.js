@@ -1,5 +1,7 @@
 const {TourGuide } = require('../models/tourGuide'); 
+const {Tour, Comment} = require('../models/tour')
 const express = require('express');
+const tour = require('../models/tour');
 const router = express.Router();
  
 
@@ -47,7 +49,23 @@ router.get('/', async (req, res) => {
        return res.status(500).send(`Internal Server Error: ${ex}`);
     }
  });
+//////////////////////////////////////////////////////////////////// PUT to add Tour///////////////////////
+router.put('/:tourGuideId/:tourId/tours', async (req, res) => {
 
+    try {
+       const tourGuide = await TourGuide.findById(req.params.tourGuideId)
+ 
+       if (!tourGuide)
+          return res.status(400).send(`The tourGuide with id "${req.params.tourGuideId}" does not exist.`);
+ 
+       tourGuide.tours.push(req.params.tourId) 
+          
+       await tourGuide.save();
+       return res.send(tourGuide);
+    } catch (ex) {
+       return res.status(500).send(`Internal Server Error: ${ex}`);
+    }
+ }); 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
  
 

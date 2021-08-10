@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const {Tour, Comment} = require('./tour')
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 const tourGuideSchema = new mongoose.Schema({
