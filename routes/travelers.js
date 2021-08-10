@@ -1,5 +1,5 @@
 const { Message,  BookedTour, Traveler,  validateTraveler,validateMessage  } = require('../models/traveler');
-const {TourGuide, Tour, Comment} = require('../models/tourGuide');
+//const {TourGuide, Tour, Comment} = require('../models/tourGuide');
 const express = require('express');
 const router = express.Router();
 

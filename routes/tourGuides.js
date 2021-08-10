@@ -1,5 +1,6 @@
-const { Message, BookedTour, Traveler, validateTraveler,validateMessage  } = require('../models/traveler'); 
-const {TourGuide, Tour, Comment } = require('../models/tourGuide');
+//const { Message, BookedTour, Traveler, validateTraveler,validateMessage  } = require('../models/traveler'); 
+const {TourGuide } = require('../models/tourGuide'); 
+//const {Tour, Comment} = require('../models/tour')
 const express = require('express');
 const router = express.Router();
  
@@ -51,59 +52,7 @@ router.get('/', async (req, res) => {
     }
  });
 
- ////////////////////////////////////////////////////////// POST new Tour //////////////////////////////////////////
-router.post('/:id/tour', async (req, res) => {
-    try {
-       const { error } = (req.body);  // validateUser
-       if (error)
-          return res.status(400).send(error);
- 
-       const tourGuide = await TourGuide.findById(req.params.id)
- 
-       const tour = new Tour({
- 
-        tTitle: req.body.tTitle,
-        description: req.body.description,
-        route: req.body.route, 
-        
-       });
- 
-       tourGuide.tours.push(tour)
- 
-       await tourGuide.save();
-       return res.send(tourGuide);
- 
-    } catch (ex) {
-       return res.status(500).send(`Internal Server Error: ${ex}`);
-    }
- }); 
- ////////////////////////////////////////////////////////// POST new Tour Comment //////////////////////////////////////////
-router.post('/:id/tourId', async (req, res) => {
-    try {
-       const { error } = (req.body);  // validateUser
-       if (error)
-          return res.status(400).send(error);
- 
-       const tourGuide = await TourGuide.findById(req.params.id)
-       const tours = await Tour.findById(req.params.tourId) 
 
-       const comment = new Comment({
- 
-        author: req.body.author,
-        feedback: req.body.feedback,
-       
-        
-       });
- 
-       tourGuide.tours.comments.push(comment)
- 
-       await tourGuide.save();
-       return res.send(tourGuide);
- 
-    } catch (ex) {
-       return res.status(500).send(`Internal Server Error: ${ex}`);
-    }
- });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
  
 
