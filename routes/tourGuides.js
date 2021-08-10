@@ -1,6 +1,4 @@
-//const { Message, BookedTour, Traveler, validateTraveler,validateMessage  } = require('../models/traveler'); 
 const {TourGuide } = require('../models/tourGuide'); 
-//const {Tour, Comment} = require('../models/tour')
 const express = require('express');
 const router = express.Router();
  
@@ -17,9 +15,7 @@ router.get('/', async (req, res) => {
  
  ////////////////////////////////////////////////////////// GET TourGuide By ID //////////////////////////////////////////
  router.get('/:id', async (req, res) => {
-    //TODO: refactor to get ALL users by videoId
     try {
- 
        const tourGuide = await TourGuide.findById(req.params.id);
        if (!tourGuide)
           return res.status(400).send(`The TourGuide with id "${req.params.id}" does not exist.`);
@@ -51,7 +47,6 @@ router.get('/', async (req, res) => {
        return res.status(500).send(`Internal Server Error: ${ex}`);
     }
  });
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
  

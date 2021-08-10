@@ -1,4 +1,3 @@
-//const {TourGuide } = require('../models/tourGuide'); 
 const {Tour, Comment} = require('../models/tour')
 const express = require('express');
 const router = express.Router();
@@ -28,7 +27,6 @@ router.get('/', async (req, res) => {
     }
  });
  
-
  ////////////////////////////////////////////////////////// POST new Tour //////////////////////////////////////////
 router.post('/', async (req, res) => {
     try {
@@ -51,6 +49,31 @@ router.post('/', async (req, res) => {
        return res.status(500).send(`Internal Server Error: ${ex}`);
     }
  }); 
+ ////////////////////////////////////////////////////////// POST new Post //////////////////////////////////////////
+router.post('/:id/comment', async (req, res) => {
+    try {
+       const { error } = (req.body);  // validateUser
+       if (error)
+          return res.status(400).send(error);
+ 
+       const tour = await Tour.findById(req.params.id)
+ 
+       const comment = new Comment({
+ 
+          author: req.body.author,
+          feedback: req.body.feedback,
+ 
+       });
+ 
+       tour.comments.push(comment)
+ 
+       await tour.save();
+       return res.send(tour);
+ 
+    } catch (ex) {
+       return res.status(500).send(`Internal Server Error: ${ex}`);
+    }
+ });
  ////////////////////////////////////////////////////////// POST new Tour Comment (needs work)/////////////////////////////////////////
 // router.post('/:id/:tourId/comment', async (req, res) => {
 //     try {
