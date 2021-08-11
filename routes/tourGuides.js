@@ -68,6 +68,21 @@ router.put('/:tourGuideId/:tourId/tours', async (req, res) => {
  }); 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
  
+////////////////////////////////////////////////////////// Validate User Login //////////////////////////////////////////
+router.post('/login', async (req, res) => {
+   try {
+      // const { error } = (req.body);  // validateUser
+      // if (error)
+      //    return res.status(400).send(error);
+
+      let tourGuide = await TourGuide.findOne({ email: req.body.email });
+      if (!tourGuide ) return res.status(400).send('User does not exist.');
+
+      return res.send(tourGuide);
+   } catch (ex) {
+      return res.status(500).send(`Internal Server Error: ${ex}`);
+   }
+});
 
 
 module.exports = router;
