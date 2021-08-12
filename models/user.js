@@ -1,15 +1,14 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const {Tour, Comment} = require('./tour')
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-const tourGuideSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: { type: String, required: true, minlength: 2, maxlength: 50 }, 
     password: { type: String, required: true, minlength: 5, maxlength: 50 }, 
     email: { type: String, required: true, minlength: 5, maxlength: 50 }, 
     avatar: { type: String, minlength: 0, maxlength: 50 },
     aboutMe: { type: String,  minlength: 5, maxlength: 1000 }, 
-    role: { type: String, required: true, minlength: 2, maxlength: 50 },  
+    role: { type: Boolean, default : false },  
     bookedTours: [],
     tours: [],
     dateAdded: { type: Date, default: Date.now },
@@ -17,13 +16,13 @@ const tourGuideSchema = new mongoose.Schema({
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
- const TourGuide = mongoose.model("TourGuide", tourGuideSchema);
+ const User = mongoose.model("User", userSchema);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
   module.exports = {
-    TourGuide: TourGuide,
+    User: User,
   } 
   
   

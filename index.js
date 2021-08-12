@@ -2,17 +2,19 @@ const connectDB = require('./startup/db');
 const express = require('express');
 const cors = require('cors')
 const app = express();
-const travelers = require('./routes/travelers')
-const tourGuides = require('./routes/tourGuides')
+
+const users = require('./routes/users')
 const tours = require('./routes/tours')
+const bookedTours = require('./routes/bookedTours')
 
 connectDB();
 
 app.use(express.json()); 
 app.use(cors())
-app.use('/api/travelers', travelers); 
-app.use('/api/tourGuides', tourGuides);
+ 
+app.use('/api/users', users);
 app.use('/api/tours', tours);
+app.use('/api/bookedTours', bookedTours);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
