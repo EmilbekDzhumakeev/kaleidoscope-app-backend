@@ -11,7 +11,8 @@ const messageSchema = new mongoose.Schema({
 
  ////////////////////////////////////////////////////////////////////////////////////////////////
 const bookedTourSchema = new mongoose.Schema({
-  tour: [],
+  
+  tourName: { type: String, required: true, minlength: 5, maxlength: 500 },
   messages: [messageSchema],
   dateAdded: { type: Date, default: Date.now },
 });

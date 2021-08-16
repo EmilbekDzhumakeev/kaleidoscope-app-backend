@@ -30,14 +30,13 @@ router.get('/', async (req, res) => {
  ////////////////////////////////////////////////////////// POST new BookedTour //////////////////////////////////////////
 router.post('/:tourId', async (req, res) => {
     try {
-        let bookedTour = await BookedTour.findOne({ tTitle: req.body.tTitle });
-        if (bookedTour) return res.status(400).send('Tour title already exists.');
+        let bookedTour = await BookedTour.findOne({tourNAme: req.params.tourId });
+        if (bookedTour) return res.status(400).send('BookedTour title already exists.');
  
       bookedTour = new BookedTour({
  
-        tTitle: req.body.tTitle,
-        description: req.body.description,
-        route: req.body.route, 
+         tourName: req.params.tourId,
+       
         
        });
  
@@ -50,13 +49,13 @@ router.post('/:tourId', async (req, res) => {
     }
  }); 
  ////////////////////////////////////////////////////////// POST new Message in BookedTour //////////////////////////////////////////
-router.post('/:id/messsages', async (req, res) => {
+router.post('/:bookedTourId/messages', async (req, res) => {
     try {
        const { error } = (req.body);  // validateUser
        if (error)
           return res.status(400).send(error);
  
-       const bookedTour = await BookedTour.findById(req.params.id)
+       const bookedTour = await BookedTour.findById(req.params.bookedTourId)
  
        const message = new Message({
  

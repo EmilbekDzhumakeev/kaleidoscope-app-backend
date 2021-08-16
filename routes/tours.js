@@ -129,34 +129,8 @@ router.put('/:tourId/:commentId/dislikes', async (req, res) => {
        return res.status(500).send(`Internal Server Error: ${ex}`);
     }
  });
- ////////////////////////////////////////////////////////// POST new Tour Comment (needs work)/////////////////////////////////////////
-// router.post('/:id/:tourId/comment', async (req, res) => {
-//     try {
-//         const tourGuide = await TourGuide.findById(req.params.id)
-//         if (!tourGuide) 
-//         return res.status(400).send(`The TourGuide with id "${req.params.id}" does not exist.`);
  
-//        tourGuide.tours.filter((data) => 
-//        data._id == req.params.tourId ? console.log('tour does not exist'): 
-       
-//          comment = new Comment({
 
-//         author: req.body.author,
-//         feedback: req.body.feedback, 
-        
-//        }) 
-       
-//        );
-//        console.log(comment);
-       
-//        tourGuide.tours.comments.push(comment) 
-//        await tourGuide.save();
-//        return res.send(tourGuide);
- 
-//     } catch (ex) {
-//        return res.status(500).send(`Internal Server Error: ${ex}`);
-//     }
-//  });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
  
 
