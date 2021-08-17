@@ -37,19 +37,16 @@ router.post('/:tourId', async (req, res) => {
        const tour = await Tour.findById(req.params.tourId); 
        if (!tour)
        return res.status(400).send(`The Tour with id "${req.params.id}" does not exist.`);
-    
-
+   
         let bookedTour = await BookedTour.findOne({tourName: tour.tTitle });
         if (bookedTour) return res.status(400).send('BookedTour title already exists.');
  
       bookedTour = new BookedTour({
  
          tourName: tour.tTitle,
-       
         
        });
- 
-      
+
        await bookedTour.save();
        return res.send(bookedTour);
  
