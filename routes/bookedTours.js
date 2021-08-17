@@ -1,4 +1,5 @@
 const { Message,  BookedTour } = require('../models/bookedTour');
+const {Tour} = require('../models/tour')
 const express = require('express');
 const router = express.Router();
  
@@ -30,12 +31,20 @@ router.get('/', async (req, res) => {
  ////////////////////////////////////////////////////////// POST new BookedTour //////////////////////////////////////////
 router.post('/:tourId', async (req, res) => {
     try {
-        let bookedTour = await BookedTour.findOne({tourNAme: req.params.tourId });
+       // first, use the :tourId param to make a query on your Tour collection for the tour you want to book
+       // then, check to see if that tour has already been booked (DONE, line 36)
+       // Finally, use the tour.tTitle property to create a bookedTour and assign the name property to the tour name
+       const tour = await Tour.findById(req.params.tourId); 
+       if (!tour)
+       return res.status(400).send(`The Tour with id "${req.params.id}" does not exist.`);
+    
+
+        let bookedTour = await BookedTour.findOne({tourName: tour.tTitle });
         if (bookedTour) return res.status(400).send('BookedTour title already exists.');
  
       bookedTour = new BookedTour({
  
-         tourName: req.params.tourId,
+         tourName: tour.tTitle,
        
         
        });
