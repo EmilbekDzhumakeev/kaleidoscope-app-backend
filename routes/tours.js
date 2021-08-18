@@ -75,14 +75,14 @@ router.post('/:id/comment', async (req, res) => {
     }
  }); 
  ////////////////////////////////////////////////////////// GET all Commets for a Tour//////////////////////////////////////////
-router.get('/:id/commnets', async (req, res) => {
+router.get('/:id/comments', async (req, res) => {
     //TODO: refactor to get ALL users by videoId
     try {
  
-       const user = await User.findById(req.params.id);
-       if (!user)
-          return res.status(400).send(`The user with id "${req.params.id}" does not exist.`);
-       return res.send(user.posts);
+       const tour = await Tour.findById(req.params.id);
+       if (!tour)
+          return res.status(400).send(`The tour with id "${req.params.id}" does not exist.`);
+       return res.send(tour.comments);
     } catch (ex) {
        return res.status(500).send(`Internal Server Error: ${ex}`);
     }
