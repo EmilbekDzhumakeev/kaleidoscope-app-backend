@@ -1,4 +1,5 @@
 const {User} = require('../models/user'); 
+const { Message,  BookedTour } = require('../models/bookedTour');
 const express = require('express');
 const router = express.Router();
  
@@ -12,7 +13,23 @@ router.get('/', async (req, res) => {
        return res.status(500).send(`Internal Server Error: ${ex}`);
     }
  });
- 
+  ////////////////////////////////////////////////////////// GET User's BookedTours//////////////////////////////////////////
+router.get('/:id/bookedTours', async (req, res) => {
+   //TODO: refactor to get ALL users by videoId
+   try {
+
+      const user = await User.findById(req.params.id);
+      if (!user)
+         return res.status(400).send(`The User with id "${req.params.id}" does not exist.`);
+
+         let bookedTour = await BookedTour.find({_id: user.bookedTours});
+
+      return res.send(bookedTour);
+   } catch (ex) {
+      return res.status(500).send(`Internal Server Error: ${ex}`);
+   }
+}); 
+
  ////////////////////////////////////////////////////////// GET User By ID //////////////////////////////////////////
  router.get('/:id', async (req, res) => {
     try {
