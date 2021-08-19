@@ -44,7 +44,8 @@ router.post('/:tourId', async (req, res) => {
       bookedTour = new BookedTour({
  
          tourName: tour.tTitle,
-        
+         description: tour.description,
+         route: tour.route,
        });
 
        await bookedTour.save();
