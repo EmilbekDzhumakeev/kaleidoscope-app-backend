@@ -13,8 +13,8 @@ const messageSchema = new mongoose.Schema({
 const bookedTourSchema = new mongoose.Schema({
   
   tourName: { type: String, required: true, minlength: 5, maxlength: 500 },
-  description: { type: String, required: true, minlength: 5, maxlength: 1000},
-  route: {type: String, required: true, minlength: 5, maxlength: 1000},
+  description: { type: String, required: false, minlength: 5, maxlength: 1000},
+  route: {type: String, required: false, minlength: 5, maxlength: 1000},
   messages: [messageSchema],
   dateAdded: { type: Date, default: Date.now },
 });
