@@ -28,13 +28,13 @@ router.get('/', async (req, res) => {
  });
  
  ////////////////////////////////////////////////////////// POST new Tour //////////////////////////////////////////
-router.post('/', async (req, res) => {
+router.post('/newTour', async (req, res) => {
     try {
         let tour = await Tour.findOne({ tTitle: req.body.tTitle });
         if (tour) return res.status(400).send('Tour title already exists.');
  
       tour = new Tour({
- 
+        creator: req.params.userId,
         tTitle: req.body.tTitle,
         description: req.body.description,
         route: req.body.route, 

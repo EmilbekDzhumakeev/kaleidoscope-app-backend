@@ -12,6 +12,7 @@ const commentSchema = new mongoose.Schema({
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 const tourSchema = new mongoose.Schema({
+    creator: { type: String, required: false, minlength: 5, maxlength: 1000 },
     tTitle: { type: String, required: true, minlength: 5, maxlength: 1000 },
     description: { type: String, required: true, minlength: 5, maxlength: 1000},
     route: {type: String, required: true, minlength: 5, maxlength: 1000},
