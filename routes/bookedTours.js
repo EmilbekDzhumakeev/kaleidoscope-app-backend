@@ -27,7 +27,19 @@ router.get('/', async (req, res) => {
        return res.status(500).send(`Internal Server Error: ${ex}`);
     }
  });
- 
+  ////////////////////////////////////////////////////////// GET BookedTour By TourName //////////////////////////////////////////
+//   router.get('/tourName', async (req, res) => {
+//    //TODO: refactor to get ALL users by videoId
+//    try {
+
+//       const bookedTour = await BookedTour.findById(req.params.id);
+//       if (!bookedTour)
+//          return res.status(400).send(`The Tour with id "${req.params.id}" does not exist.`);
+//       return res.send(bookedTour);
+//    } catch (ex) {
+//       return res.status(500).send(`Internal Server Error: ${ex}`);
+//    }
+// });
  ////////////////////////////////////////////////////////// POST new BookedTour //////////////////////////////////////////
 router.post('/:tourId', async (req, res) => {
     try {
@@ -94,34 +106,7 @@ router.get('/:id/messages', async (req, res) => {
     }
  }); 
 
- ////////////////////////////////////////////////////////// POST new Tour Comment (needs work)/////////////////////////////////////////
-// router.post('/:id/:tourId/comment', async (req, res) => {
-//     try {
-//         const tourGuide = await TourGuide.findById(req.params.id)
-//         if (!tourGuide) 
-//         return res.status(400).send(`The TourGuide with id "${req.params.id}" does not exist.`);
- 
-//        tourGuide.tours.filter((data) => 
-//        data._id == req.params.tourId ? console.log('bookedTour does not exist'): 
-       
-//          comment = new Comment({
 
-//         author: req.body.author,
-//         feedback: req.body.feedback, 
-        
-//        }) 
-       
-//        );
-//        console.log(comment);
-       
-//        tourGuide.tours.comments.push(comment) 
-//        await tourGuide.save();
-//        return res.send(tourGuide);
- 
-//     } catch (ex) {
-//        return res.status(500).send(`Internal Server Error: ${ex}`);
-//     }
-//  });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
  
 
