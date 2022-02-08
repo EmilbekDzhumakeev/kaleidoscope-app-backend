@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/EmilbekDzhumakeev/YouTube-Clone-App-backend#readme",
   "dependencies": {
-    "config": "^3.3.6",
+    "config": "^3.3.7",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "joi": "^17.4.0",
-    "mongoose": "^5.13.2",
-    "nodemon": "^2.0.10"
+    "express": "^4.17.2",
+    "joi": "^17.6.0",
+    "mongoose": "^5.13.14",
+    "nodemon": "^2.0.15"
   }
 }
