@@ -1,7 +1,8 @@
-const {User} = require('../models/user'); 
+const {User, validateUser} = require('../models/user'); 
 const { Message,  BookedTour } = require('../models/bookedTour');
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
  
 
 ////////////////////////////////////////////////////////// GET all Users//////////////////////////////////////////
@@ -43,25 +44,47 @@ router.get('/:id/bookedTours', async (req, res) => {
  });
  
  ////////////////////////////////////////////////////////// POST new User//////////////////////////////////////////
- router.post('/', async (req, res) => {
-    try {
+//  router.post('/', async (req, res) => {
+//     try {
  
-       let user = await User.findOne({ email: req.body.email });
-       if (user) return res.status(400).send('User already registered.');
+//        let user = await User.findOne({ email: req.body.email });
+//        if (user) return res.status(400).send('User already registered.');
  
-       user = new User({
-          name: req.body.name,
-          email: req.body.email,
-          password: req.body.password,
+//        user = new User({
+//           name: req.body.name,
+//           email: req.body.email,
+//           password: req.body.password,
           
-       });
+//        });
  
-       await user.save();
-       return res.send(user);
-    } catch (ex) {
-       return res.status(500).send(`Internal Server Error: ${ex}`);
-    }
- });
+//        await user.save();
+//        return res.send(user);
+//     } catch (ex) {
+//        return res.status(500).send(`Internal Server Error: ${ex}`);
+//     }
+//  });
+////////////////////////////////////////////////////////// POST new User (JWT)  /////////////////////////////////////////
+router.post('/', async (req, res) => {
+   try {
+         const { error } = validateUser(req.body);
+
+         if (error) return res.status(400).send(error.details[0].message);
+
+         let user = await User.findOne({ email: req.body.email });
+         if (user) return res.status(400).send('User already registered.');
+
+         const salt = await bcrypt.genSalt(10);
+          user = new User({
+             name: req.body.name,
+             email: req.body.email,
+             password: await bcrypt.hash(req.body.password, salt),
+   });
+          await user.save();
+          return res.send({ _id: user._id, name: user.name, email: user.email });
+   }      catch (ex) {
+          return res.status(500).send(`Internal Server Error: ${ex}`);
+   }
+  });
 //////////////////////////////////////////////////////////////////// PUT to add Tour///////////////////////
 router.put('/:userId/:tourId/tours', async (req, res) => {
 
